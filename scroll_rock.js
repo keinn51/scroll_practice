@@ -18,9 +18,11 @@ function scroll_off() {
 function scollShow() {
     $(document).on('scroll touchmove mousewheel', function (e) {
         console.log(scrollY)
-        $('.pc-content').css({
-            'opacity': scrollY < 300 ? scrollY / 300 : 1
-        });
+        if (scrollY > 500) {
+            $('.position-box').addClass('fixed-image');
+        } else {
+            $('.position-box').removeClass('fixed-image');
+        }
     });
 }
 
