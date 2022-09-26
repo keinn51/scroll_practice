@@ -1,21 +1,12 @@
-// 스크롤 제한 ON
-function scroll_on() {
-    $('.pc-content').on('scroll touchmove mousewheel', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        alert('stop scroll!');
-        return false;
-    });
-}
-// 스크롤 제한 OFF
-function scroll_off() {
-    $('.pc-content').off('scroll touchmove mousewheel');
-}
 
-// 스크롤 이벤트를 막기 위한 연구
 
-// 1. 스크롤 방식 (실패)
 function scollShow() {
+    const animationStartScrollY = 500;
+    const animationEndScrollY = 2300;
+    const sidebarStartScrollY = 1300;
+    const imageStartScrollY = 1800;
+    const animationIntervalHeight = imageStartScrollY - sidebarStartScrollY
+
     $(document).on('scroll touchmove mousewheel', function (e) {
         console.log(scrollY)
         if (scrollY > 500 && scrollY < 2300) {
@@ -30,33 +21,17 @@ function scollShow() {
             $('.position-box').removeClass('abosulute-bottom-100');
         }
 
-        $('.sidebar-left').css({ 'opacity': scrollY > 1300 ? (scrollY - 1300) / 500 : 0 });
-        $('.sidebar-top').css({ 'opacity': scrollY > 1300 ? (scrollY - 1300) / 500 : 0 });
-        $('.left-image').css({ 'opacity': scrollY > 1800 ? (scrollY - 1800) / 500 : 0 });
-        $('.right-image').css({ 'opacity': scrollY > 1800 ? (scrollY - 1800) / 500 : 0 });
+        $('.sidebar-left').css({ 'opacity': scrollY > sidebarStartScrollY ? (scrollY - sidebarStartScrollY) / animationIntervalHeight : 0 });
+        $('.sidebar-top').css({ 'opacity': scrollY > sidebarStartScrollY ? (scrollY - sidebarStartScrollY) / animationIntervalHeight : 0 });
+        $('.left-image').css({ 'opacity': scrollY > imageStartScrollY ? (scrollY - imageStartScrollY) / animationIntervalHeight : 0 });
+        $('.right-image').css({ 'opacity': scrollY > imageStartScrollY ? (scrollY - imageStartScrollY) / animationIntervalHeight : 0 });
+
+        $('.sidebar-top').css({ 'left': scrollY > sidebarStartScrollY ? scrollY > imageStartScrollY ? -50 : -((scrollY - sidebarStartScrollY) / 10) : 0 });
+        $('.sidebar-left').css({ 'top': scrollY > sidebarStartScrollY ? scrollY > imageStartScrollY ? 0 : (500 - (scrollY - sidebarStartScrollY)) / 10 : 50 });
+        $('.left-image').css({ 'opacity': scrollY > imageStartScrollY ? (scrollY - imageStartScrollY) / animationIntervalHeight : 0 });
+        $('.right-image').css({ 'opacity': scrollY > imageStartScrollY ? (scrollY - imageStartScrollY) / animationIntervalHeight : 0 });
 
     });
 }
 
 scollShow()
-
-
-// 2. mouseover 방식 (실패)
-// $('body').on('mouseover', function (e) {
-//     console.log(scrollY);
-//     if (scrollY > 200) alert('200!')
-// });
-
-// 3. scrollTop document
-
-// function scrollBanner() {
-//     $(document).on('scroll', function () {
-//         console.log($(this).scrollTop())
-//         var scrollPos = $(this).scrollTop();
-//         $('.fade-top').css({
-//             'opacity': 1 - (scrollPos / 100)
-//         });
-//     });
-// }
-
-// scrollBanner()
