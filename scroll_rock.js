@@ -18,10 +18,16 @@ function scroll_off() {
 function scollShow() {
     $(document).on('scroll touchmove mousewheel', function (e) {
         console.log(scrollY)
-        if (scrollY > 500) {
+        if (scrollY > 500 && scrollY < 1300) {
             $('.position-box').addClass('fixed-image');
         } else {
             $('.position-box').removeClass('fixed-image');
+        }
+
+        if (scrollY >= 1300) {
+            $('.position-box').addClass('abosulute-bottom-100');
+        } else {
+            $('.position-box').removeClass('abosulute-bottom-100');
         }
     });
 }
