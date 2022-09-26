@@ -8,16 +8,16 @@
     <title>Jquery Scroll</title>
     <style>
         body {
-            height: 3000px;
+            height: 3500px;
         }
         .pc-content {
             width: 100%;
             height: 100%;
+            background-color: antiquewhite;
         }
         .image-background {
             position: relative;
-            margin-top: 500px;
-            background-color: black;
+            background-color: white;
             display: flex;
             justify-content: center;
             width: 100%;
@@ -25,41 +25,33 @@
         }
         .position-box {
             position: absolute;
-            height: 500px;
-            width: 800px;
-            background-color: beige;
+            width: 1000px;
             top: 100px;
             left: 50%;
-            margin-left: -400px;   
+            margin-left: -500px;
+        }
+        .main-image {
+            width: 100%;
         }
         .sidebar-top {
             position: absolute;
-            top: -50px;
-            width: 850px;
-            height: 50px;
-            background-color: grey;
+            /* top: -50px; */
+            width: 1000px;
         }
         .sidebar-left {
             position: absolute;
-            left: -50px;
-            width: 50px;
-            height: 500px;
-            background-color: grey;
-            
+            /* left: -50px; */
+            /* height: 500px; */
         }
         .left-image {
             position: absolute;
             left: -150px;
             width: 200px;
-            height: 300px;
-            background-color: brown;
         }
         .right-image {
             position: absolute;
             right: -80px;
             width: 180px;
-            height: 400px;
-            background-color: brown;
         }
 
         /* css for animation */
@@ -68,7 +60,7 @@
             top: 50%;
             left: 50%;
             margin-top: -300px;
-            margin-left: -400px;   
+            margin-left: -500px;   
         }
         .abosulute-bottom-100 {
             top: initial;
@@ -78,13 +70,16 @@
 </head>
 <body>
    <div class="pc-content">
+        <div style="height: 500px;">
+        </div>
         <div class="image-background">
             <div class="image-container">
                 <div class="position-box">
-                    <div class="sidebar-top"></div>
-                    <div class="sidebar-left"></div>
-                    <div class="left-image"></div>
-                    <div class="right-image"></div>
+                    <img class="main-image" src="./img/page1.jpg" alt="none">
+                    <img class="sidebar-top" src="./img/header.jpg" alt="none">
+                    <img class="sidebar-left" src="./img/side.jpg" alt="none">
+                    <img class="left-image" src="./img/left.jpg" alt="none">
+                    <img class="right-image" src="./img/right.jpg" alt="none">
                 </div>
             </div>
         </div>
