@@ -15,7 +15,7 @@
             height: 100%;
             background-color: antiquewhite;
         }
-        .image-background {
+        .main-preview {
             position: relative;
             background-color: white;
             display: flex;
@@ -23,32 +23,36 @@
             width: 100%;
             height: 2500px;
         }
-        .position-box {
+        .main-preview-contents {
             position: absolute;
             width: 1000px;
             top: 100px;
             left: 50%;
             margin-left: -500px;
+            box-shadow: 10px 20px 50px 0px rgb(189, 176, 169, 0.54);
         }
-        .main-image {
+        .main-preview-image {
             width: 100%;
         }
-        .sidebar-top {
+        .main-preview-sidebar-top {
             position: absolute;
             width: 1000px;
         }
-        .sidebar-left {
+        .main-preview-sidebar-left {
             position: absolute;
+            box-shadow: 10px 20px 50px 0px rgb(189, 176, 169, 0.54);
         }
-        .left-image {
+        .main-preview-popup-left {
             position: absolute;
             left: -175px;
             width: 200px;
+            box-shadow: 10px 20px 40px 0px rgb(189, 182, 178, 0.68);
         }
-        .right-image {
+        .main-preview-popup-right {
             position: absolute;
             right: -140px;
             width: 200px;
+            box-shadow: 10px 20px 40px 0px rgb(189, 182, 178, 0.68);
         }
 
         /* css for animation */
@@ -67,17 +71,13 @@
 </head>
 <body>
    <div class="pc-content">
-        <div style="height: 500px;">
-        </div>
-        <div class="image-background">
-            <div class="image-container">
-                <div class="position-box">
-                    <img class="main-image" src="./img/page1.jpg" alt="none">
-                    <img class="sidebar-top" src="./img/header.jpg" alt="none">
-                    <img class="sidebar-left" src="./img/side.jpg" alt="none">
-                    <img class="left-image" src="./img/left.jpg" alt="none">
-                    <img class="right-image" src="./img/right.jpg" alt="none">
-                </div>
+        <div class="main-preview">
+            <div class="main-preview-contents">
+                <img class="main-preview-image" src="./img/page1.jpg" alt="none">
+                <img class="main-preview-sidebar-top" src="./img/header.jpg" alt="none">
+                <img class="main-preview-sidebar-left" src="./img/side.jpg" alt="none">
+                <img class="main-preview-popup-left" src="./img/left.jpg" alt="none">
+                <img class="main-preview-popup-right" src="./img/right.jpg" alt="none">
             </div>
         </div>
    </div>
