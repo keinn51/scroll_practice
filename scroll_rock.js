@@ -18,17 +18,23 @@ function scroll_off() {
 function scollShow() {
     $(document).on('scroll touchmove mousewheel', function (e) {
         console.log(scrollY)
-        if (scrollY > 500 && scrollY < 1300) {
+        if (scrollY > 500 && scrollY < 2300) {
             $('.position-box').addClass('fixed-image');
         } else {
             $('.position-box').removeClass('fixed-image');
         }
 
-        if (scrollY >= 1300) {
+        if (scrollY >= 2300) {
             $('.position-box').addClass('abosulute-bottom-100');
         } else {
             $('.position-box').removeClass('abosulute-bottom-100');
         }
+
+        $('.sidebar-left').css({ 'opacity': scrollY > 1300 ? (scrollY - 1300) / 500 : 0 });
+        $('.sidebar-top').css({ 'opacity': scrollY > 1300 ? (scrollY - 1300) / 500 : 0 });
+        $('.left-image').css({ 'opacity': scrollY > 1800 ? (scrollY - 1800) / 500 : 0 });
+        $('.right-image').css({ 'opacity': scrollY > 1800 ? (scrollY - 1800) / 500 : 0 });
+
     });
 }
 
