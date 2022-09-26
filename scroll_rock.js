@@ -18,12 +18,10 @@ function scollShow() {
     const slideWidht = 50;
 
     $(document).on('scroll touchmove mousewheel', function () {
-        let leftSidebarWidth = document.getElementsByClassName('sidebar-left')[0].width;
-        let leftSidebarHeight = document.getElementsByClassName('sidebar-left')[0].height;
-        let topSidebarWidth = document.getElementsByClassName('sidebar-top')[0].width;
-        let topSidebarHeight = document.getElementsByClassName('sidebar-top')[0].height;
-        let mainImageWidth = document.getElementsByClassName('main-image')[0].width;
-        let mainImageHeight = document.getElementsByClassName('main-image')[0].height;
+        let leftSidebarWidth = document.getElementsByClassName('sidebar-left')[0].getBoundingClientRect().width;
+        let topSidebarHeight = document.getElementsByClassName('sidebar-top')[0].getBoundingClientRect().height;
+        let mainImageWidth = document.getElementsByClassName('main-image')[0].getBoundingClientRect().width;
+        let mainImageHeight = document.getElementsByClassName('main-image')[0].getBoundingClientRect().height;
         console.log(scrollY)
 
         $('.sidebar-left').css({ 'left': -leftSidebarWidth, 'height': mainImageHeight });
@@ -48,8 +46,8 @@ function scollShow() {
 
         $('.sidebar-top').css({ 'left': scrollY > sidebarStartScrollY ? scrollY > imageStartScrollY ? -leftSidebarWidth : -((scrollY - sidebarStartScrollY) * (leftSidebarWidth / animationIntervalHeight)) : 0 });
         $('.sidebar-left').css({ 'top': scrollY > sidebarStartScrollY ? scrollY > imageStartScrollY ? 0 : (animationIntervalHeight - (scrollY - sidebarStartScrollY)) * (topSidebarHeight / animationIntervalHeight) : slideWidht });
-        $('.left-image').css({ 'bottom': scrollY > imageStartScrollY ? scrollY > animationEndScrollY ? -20 : (animationIntervalHeight - (scrollY - imageStartScrollY)) / 12 - 20 : 30 });
-        $('.right-image').css({ 'bottom': scrollY > imageStartScrollY ? scrollY > animationEndScrollY ? slideWidht : (scrollY - imageStartScrollY) / 12 : 0 });
+        $('.left-image').css({ 'bottom': scrollY > imageStartScrollY ? scrollY > animationEndScrollY ? -75 : (animationIntervalHeight - (scrollY - imageStartScrollY)) * (slideWidht / animationIntervalHeight) - 75 : -25 });
+        $('.right-image').css({ 'bottom': scrollY > imageStartScrollY ? scrollY > animationEndScrollY ? slideWidht : (scrollY - imageStartScrollY) * (slideWidht / animationIntervalHeight) : 0 });
 
     });
 }
