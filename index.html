@@ -24,11 +24,10 @@
             height: 2500px;
         }
         .main-preview-contents {
-            position: absolute;
+            position: sticky;
             width: 1000px;
             top: 100px;
-            left: 50%;
-            margin-left: -500px;
+            margin: 100px 0;
             box-shadow: 10px 20px 50px 0px rgb(189, 176, 169, 0.54);
         }
         .main-preview-image {
@@ -55,22 +54,11 @@
             box-shadow: 10px 20px 40px 0px rgb(189, 182, 178, 0.68);
         }
 
-        /* css for animation */
-        .main-preview-image-fixed {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            margin-top: -300px;
-            margin-left: -500px;   
-        }
-        .main-preview-image-bot_100 {
-            top: initial;
-            bottom: 100px;
-        }
     </style>
 </head>
 <body>
-   <div class="pc-content">
+    <div class="pc-content">
+       <div class="temp" style="height: 300px; background-color: antiquewhite;"></div>
         <div class="main-preview">
             <div class="main-preview-contents">
                 <img class="main-preview-image" src="./img/page1.jpg" alt="none">

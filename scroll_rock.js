@@ -9,18 +9,6 @@ function setElemSizeWhileScroll() {
     $('.main-preview-contents').css({ 'height': mainImageHeight });
 }
 
-function setClassWhileScroll(animationStartScrollY, animationEndScrollY) {
-    if (scrollY > animationStartScrollY && scrollY < animationEndScrollY)
-        $('.main-preview-contents').addClass('main-preview-image-fixed');
-    else
-        $('.main-preview-contents').removeClass('main-preview-image-fixed');
-
-    if (scrollY >= animationEndScrollY)
-        $('.main-preview-contents').addClass('main-preview-image-bot_100');
-    else
-        $('.main-preview-contents').removeClass('main-preview-image-bot_100');
-}
-
 function getAppearingOpacityForScroll(startScroll, scrollWidth) {
     if (scrollY > startScroll) return (scrollY - startScroll) / scrollWidth
     else return 0;
@@ -80,10 +68,9 @@ function mainImageScrollShow(animationStartScrollY, animationInterval) {
     const animationEndScrollY = animationStartScrollY + (3 * animationInterval);
     $(document).on('scroll touchmove mousewheel', function () {
         setElemSizeWhileScroll();
-        setClassWhileScroll(animationStartScrollY, animationEndScrollY);
         setOpacityForElem(sidebarShowScrollY, imageShowScrollY);
         setPositionForScroll(animationStartScrollY, animationInterval);
     });
 }
 
-mainImageScrollShow(0, 600)
+mainImageScrollShow(300, 600)
