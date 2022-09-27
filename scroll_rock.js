@@ -41,7 +41,14 @@ function getPositionForScroll(mode, startScroll, endScroll, scrollSize, startPos
     const processRatio = slideWidth / scrollSize, leaveMode = 1, comeMode = 2;
     const processLength = scrollY - startScroll;
 
-    if (scrollY > endScroll) return startPosition - slideWidth;
+    if (scrollY > endScroll) {
+        switch (mode) {
+            case leaveMode:
+                return startPosition + slideWidth;
+            case comeMode:
+                return startPosition - slideWidth;;
+        }
+    }
     else if (scrollY > startScroll) {
         switch (mode) {
             case leaveMode:
@@ -79,4 +86,4 @@ function mainImageScrollShow(animationStartScrollY, animationInterval) {
     });
 }
 
-mainImageScrollShow(500, 600)
+mainImageScrollShow(0, 600)
