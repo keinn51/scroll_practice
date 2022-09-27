@@ -1,76 +1,87 @@
-function setElemSizeWhileScroll() {
-    let leftSidebarWidth, topSidebarHeight;
-    const mainImageWidth = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().width;
-    const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
+function mainImageScroll(animationStartScrollY, animationInterval) {
+    const $mainContent = $('.main-preview-contents')
+    const $sideBarLeft = $('.main-preview-sidebar-left')
+    const $sideBarTop = $('.main-preview-sidebar-top')
+    const $popupLeft = $('.main-preview-popup-left')
+    const $popupRight = $('.main-preview-popup-right')
+    const $target = $('.main-preview-target')
 
-    $('.main-preview-sidebar-left').css({ 'height': mainImageHeight });
-    leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
-    $('.main-preview-sidebar-left').css({ 'left': -leftSidebarWidth });
-    $('.main-preview-sidebar-top').css({ 'width': mainImageWidth + leftSidebarWidth });
-    topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
-    $('.main-preview-sidebar-top').css({ 'top': -topSidebarHeight });
-    $('.main-preview-contents').css({ 'height': mainImageHeight });
-}
+    function setElemSizeForMainImage() {
+        let leftSidebarWidth, topSidebarHeight;
+        const mainImageWidth = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().width;
+        const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
 
-function getAppearingOpacityForScroll(startScroll, scrollWidth) {
-    if (scrollY > startScroll) return (scrollY - startScroll) / scrollWidth
-    else return 0;
-}
-
-function setOpacityForElem(animationStartScrollY, animationInterval) {
-    const sidebarShowScrollY = animationStartScrollY + animationInterval;
-    const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
-    $('.main-preview-sidebar-left').css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationInterval) });
-    $('.main-preview-sidebar-top').css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationInterval) });
-    $('.main-preview-popup-left').css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
-    $('.main-preview-popup-right').css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
-}
-
-function getPositionForScroll(mode, startScroll, endScroll, scrollSize, startPosition) {
-    const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
-    const slideWidth = leftSidebarWidth;
-    const processRatio = slideWidth / scrollSize, leaveMode = 1, comeMode = 2;
-    const processLength = scrollY - startScroll;
-
-    if (scrollY > endScroll) {
-        switch (mode) {
-            case leaveMode:
-                return startPosition + slideWidth;
-            case comeMode:
-                return startPosition - slideWidth;;
-        }
+        $sideBarLeft.css({ 'height': mainImageHeight });
+        leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
+        $sideBarLeft.css({ 'left': -leftSidebarWidth });
+        $sideBarTop.css({ 'width': mainImageWidth + leftSidebarWidth });
+        topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
+        $sideBarTop.css({ 'top': -topSidebarHeight });
+        $mainContent.css({ 'height': mainImageHeight });
     }
-    else if (scrollY > startScroll) {
-        switch (mode) {
-            case leaveMode:
-                return startPosition + ((processLength) * processRatio);
-            case comeMode:
-                return startPosition - ((processLength) * processRatio);
+
+    function getAppearingOpacityForScroll(startScroll, scrollWidth) {
+        if (scrollY > startScroll) return (scrollY - startScroll) / scrollWidth
+        else return 0;
+    }
+
+    function setOpacityForElem(animationStartScrollY, animationInterval) {
+        const sidebarShowScrollY = animationStartScrollY + animationInterval;
+        const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
+        $sideBarLeft.css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationInterval) });
+        $sideBarTop.css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationInterval) });
+        $popupLeft.css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
+        $popupRight.css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
+        $target.css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
+    }
+
+    function getPositionForScroll(mode, startScroll, endScroll, scrollSize, startPosition) {
+        const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
+        const slideWidth = leftSidebarWidth;
+        const processRatio = slideWidth / scrollSize, leaveMode = 1, comeMode = 2;
+        const processLength = scrollY - startScroll;
+
+        if (scrollY > endScroll) {
+            switch (mode) {
+                case leaveMode:
+                    return startPosition + slideWidth;
+                case comeMode:
+                    return startPosition - slideWidth;;
+            }
         }
-    } else startPosition;
+        else if (scrollY > startScroll) {
+            switch (mode) {
+                case leaveMode:
+                    return startPosition + ((processLength) * processRatio);
+                case comeMode:
+                    return startPosition - ((processLength) * processRatio);
+            }
+        } else return startPosition;
+    }
+
+    function setPositionForScroll(animationStartScrollY, animationInterval) {
+        const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
+        const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
+        const topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
+        const sidebarShowScrollY = animationStartScrollY + animationInterval;
+        const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
+        const animationEndScrollY = animationStartScrollY + (3 * animationInterval);
+        const slideWidth = leftSidebarWidth;
+        $sideBarTop.css({ 'left': getPositionForScroll(2, sidebarShowScrollY, imageShowScrollY, animationInterval, 0) });
+        $sideBarLeft.css({ 'top': getPositionForScroll(2, sidebarShowScrollY, imageShowScrollY, animationInterval, slideWidth) });
+        $popupLeft.css({ 'top': getPositionForScroll(1, imageShowScrollY, animationEndScrollY, animationInterval, mainImageHeight + topSidebarHeight - 270) });
+        $popupRight.css({ 'top': getPositionForScroll(2, imageShowScrollY, animationEndScrollY, animationInterval, 100) });
+    }
+
+
+    function mainImageScrollShow(animationStartScrollY, animationInterval) {
+        $(setElemSizeForMainImage);
+        $(document).on('scroll touchmove mousewheel', function () {
+            setOpacityForElem(animationStartScrollY, animationInterval);
+            setPositionForScroll(animationStartScrollY, animationInterval);
+        });
+    }
+    mainImageScrollShow(animationStartScrollY, animationInterval)
 }
 
-function setPositionForScroll(animationStartScrollY, animationInterval) {
-    const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
-    const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
-    const topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
-    const sidebarShowScrollY = animationStartScrollY + animationInterval;
-    const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
-    const animationEndScrollY = animationStartScrollY + (3 * animationInterval);
-    const slideWidth = leftSidebarWidth;
-    $('.main-preview-sidebar-top').css({ 'left': getPositionForScroll(2, sidebarShowScrollY, imageShowScrollY, animationInterval, 0) });
-    $('.main-preview-sidebar-left').css({ 'top': getPositionForScroll(2, sidebarShowScrollY, imageShowScrollY, animationInterval, slideWidth) });
-    $('.main-preview-popup-left').css({ 'top': getPositionForScroll(1, imageShowScrollY, animationEndScrollY, animationInterval, mainImageHeight + topSidebarHeight - 270) });
-    $('.main-preview-popup-right').css({ 'top': getPositionForScroll(2, imageShowScrollY, animationEndScrollY, animationInterval, 100) });
-}
-
-
-function mainImageScrollShow(animationStartScrollY, animationInterval) {
-    $(setElemSizeWhileScroll);
-    $(document).on('scroll touchmove mousewheel', function () {
-        setOpacityForElem(animationStartScrollY, animationInterval);
-        setPositionForScroll(animationStartScrollY, animationInterval);
-    });
-}
-
-mainImageScrollShow(300, 600)
+mainImageScroll(300, 600)
