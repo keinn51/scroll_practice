@@ -14,14 +14,14 @@ function getAppearingOpacityForScroll(startScroll, scrollWidth) {
     else return 0;
 }
 
-function setOpacityForElem(sidebarShowScrollY, imageShowScrollY) {
-    const animationIntervalHeight = imageShowScrollY - sidebarShowScrollY;
-    $('.main-preview-sidebar-left').css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationIntervalHeight) });
-    $('.main-preview-sidebar-top').css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationIntervalHeight) });
-    $('.main-preview-popup-left').css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationIntervalHeight) });
-    $('.main-preview-popup-right').css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationIntervalHeight) });
+function setOpacityForElem(animationStartScrollY, animationInterval) {
+    const sidebarShowScrollY = animationStartScrollY + animationInterval;
+    const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
+    $('.main-preview-sidebar-left').css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationInterval) });
+    $('.main-preview-sidebar-top').css({ 'opacity': getAppearingOpacityForScroll(sidebarShowScrollY, animationInterval) });
+    $('.main-preview-popup-left').css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
+    $('.main-preview-popup-right').css({ 'opacity': getAppearingOpacityForScroll(imageShowScrollY, animationInterval) });
 }
-
 
 function getPositionForScroll(mode, startScroll, endScroll, scrollSize, startPosition) {
     const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
@@ -63,12 +63,9 @@ function setPositionForScroll(animationStartScrollY, animationInterval) {
 
 
 function mainImageScrollShow(animationStartScrollY, animationInterval) {
-    const sidebarShowScrollY = animationStartScrollY + animationInterval;
-    const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
-    const animationEndScrollY = animationStartScrollY + (3 * animationInterval);
     $(document).on('scroll touchmove mousewheel', function () {
-        setElemSizeWhileScroll();
-        setOpacityForElem(sidebarShowScrollY, imageShowScrollY);
+        setElemSizeWhileScroll()
+        setOpacityForElem(animationStartScrollY, animationInterval);
         setPositionForScroll(animationStartScrollY, animationInterval);
     });
 }
