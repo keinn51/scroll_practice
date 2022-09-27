@@ -67,7 +67,7 @@ function setPositionForScroll(animationStartScrollY, animationInterval) {
 }
 
 
-function scollShow(animationStartScrollY, animationInterval) {
+function mainImageScrollShow(animationStartScrollY, animationInterval) {
     const sidebarShowScrollY = animationStartScrollY + animationInterval;
     const imageShowScrollY = animationStartScrollY + (2 * animationInterval);
     const animationEndScrollY = animationStartScrollY + (3 * animationInterval);
@@ -79,4 +79,4 @@ function scollShow(animationStartScrollY, animationInterval) {
     });
 }
 
-scollShow(500, 600)
+mainImageScrollShow(500, 600)
