@@ -1,11 +1,14 @@
 function setElemSizeWhileScroll() {
-    const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
-    const topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
+    let leftSidebarWidth, topSidebarHeight;
     const mainImageWidth = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().width;
     const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
 
-    $('.main-preview-sidebar-left').css({ 'left': -leftSidebarWidth, 'height': mainImageHeight });
-    $('.main-preview-sidebar-top').css({ 'top': -topSidebarHeight, 'width': mainImageWidth + leftSidebarWidth });
+    $('.main-preview-sidebar-left').css({ 'height': mainImageHeight });
+    leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
+    $('.main-preview-sidebar-left').css({ 'left': -leftSidebarWidth });
+    $('.main-preview-sidebar-top').css({ 'width': mainImageWidth + leftSidebarWidth });
+    topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
+    $('.main-preview-sidebar-top').css({ 'top': -topSidebarHeight });
     $('.main-preview-contents').css({ 'height': mainImageHeight });
 }
 
@@ -63,8 +66,8 @@ function setPositionForScroll(animationStartScrollY, animationInterval) {
 
 
 function mainImageScrollShow(animationStartScrollY, animationInterval) {
+    $(setElemSizeWhileScroll);
     $(document).on('scroll touchmove mousewheel', function () {
-        setElemSizeWhileScroll()
         setOpacityForElem(animationStartScrollY, animationInterval);
         setPositionForScroll(animationStartScrollY, animationInterval);
     });
