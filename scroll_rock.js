@@ -20,6 +20,14 @@ function mainImageScroll(animationStartScrollY, animationInterval) {
         $mainContent.css({ 'height': mainImageHeight });
     }
 
+    function setMainImagePosition() {
+        const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
+        const topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
+
+        $mainContent.css({ 'top': (window.innerHeight - (mainImageHeight + topSidebarHeight)) / 2 })
+        $mainContent.css({ 'margin': `${(window.innerHeight - (mainImageHeight + topSidebarHeight)) / 2}px 0px` })
+    }
+
     function getAppearingOpacityForScroll(startScroll, scrollWidth) {
         if (scrollY > startScroll) return (scrollY - startScroll) / scrollWidth
         else return 0;
@@ -76,6 +84,7 @@ function mainImageScroll(animationStartScrollY, animationInterval) {
 
     function mainImageScrollShow(animationStartScrollY, animationInterval) {
         $(setElemSizeForMainImage);
+        $(setMainImagePosition);
         $(document).on('scroll touchmove mousewheel', function () {
             setOpacityForElem(animationStartScrollY, animationInterval);
             setPositionForScroll(animationStartScrollY, animationInterval);
