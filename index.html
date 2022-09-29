@@ -24,7 +24,6 @@
             display: flex;
             justify-content: center;
             width: 100%;
-            height: 2500px;
         }
         .main-preview-contents {
             position: sticky;
@@ -46,23 +45,16 @@
         }
         .main-preview-popup-left {
             position: absolute;
-            left: -175px;
-            width: 200px;
             box-shadow: 10px 20px 40px 0px rgb(189, 182, 178, 0.68);
             opacity: 0;
         }
         .main-preview-popup-right {
             position: absolute;
-            right: -140px;
-            width: 200px;
             box-shadow: 10px 20px 40px 0px rgb(189, 182, 178, 0.68);
             opacity: 0;
         }
         .main-preview-target {
             position: absolute;
-            right: 100px;
-            top: 172px;
-            width: 380px;
             opacity: 0;
         }
 
@@ -71,6 +63,12 @@
         @media (max-width: 1000px) {
             .main-text_video {
                 width: calc(100% * (43/50));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-preview-contents {
+                margin: 0;
             }
         }
 
