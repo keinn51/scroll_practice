@@ -8,11 +8,22 @@
     <title>Jquery Scroll</title>
     <style>
         body {
-            height: 3500px;
+            /* height: 3500px; */
         }
         .pc-content {
             width: 100%;
             height: 100%;
+        }
+
+        .main-content-intro {
+            position: sticky;
+            top: 0px;
+        }
+
+        .main-text_video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .main-text_video {
@@ -58,8 +69,6 @@
             opacity: 0;
         }
 
-
-
         @media (max-width: 1000px) {
             .main-text_video {
                 width: calc(100% * (43/50));
@@ -68,7 +77,8 @@
 
         @media (max-width: 768px) {
             .main-preview-contents {
-                margin: 0;
+                position: relative;
+                margin: unset;
             }
         }
 
@@ -77,24 +87,28 @@
                 width: calc(100% * (5/7));
             }
         }
-
-    </style>
+        </style>
 </head>
 <body>
     <div class="pc-content">
-        <div style="display: flex; justify-content: center;">
-            <video class="main-text_video" autoplay muted loop playsinline>
-                <source src="./realreal.mp4">
-            </video>
-        </div>
-        <div class="main-preview">
-            <div class="main-preview-contents">
-                <img class="main-preview-image" src="./img/main_image.jpg" alt="none">
-                <img class="main-preview-sidebar-top" src="./img/main_side_top.jpg" alt="none">
-                <img class="main-preview-sidebar-left" src="./img/main_side_left.jpg" alt="none">
-                <img class="main-preview-target" src="./img/main_target.png" alt="none">
-                <img class="main-preview-popup-left" src="./img/main_pop_left.jpg" alt="none">
-                <img class="main-preview-popup-right" src="./img/main_pop_right.jpg" alt="none">
+        <div class="temp" style="height: 400px; background: gold"></div>
+        <div class="main-container">
+            <div class="main-content-intro">
+                <div class="main-text_video-container">
+                    <video class="main-text_video" autoplay muted loop playsinline>
+                        <source src="./realreal.mp4">
+                    </video>
+                </div>
+                <div class="main-preview">
+                    <div class="main-preview-contents">
+                        <img class="main-preview-image" src="./img/main_image.jpg" alt="none">
+                        <img class="main-preview-sidebar-top" src="./img/main_side_top.jpg" alt="none">
+                        <img class="main-preview-sidebar-left" src="./img/main_side_left.jpg" alt="none">
+                        <img class="main-preview-target" src="./img/main_target.png" alt="none">
+                        <img class="main-preview-popup-left" src="./img/main_pop_left.jpg" alt="none">
+                        <img class="main-preview-popup-right" src="./img/main_pop_right.jpg" alt="none">
+                    </div>
+                </div>
             </div>
         </div>
    </div>
