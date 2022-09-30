@@ -10,14 +10,15 @@ function mainImageScroll(animationInterval) {
     const $popupRight = $('.main-preview-popup-right')
     const $target = $('.main-preview-target')
 
-    function setElemSizeForMainImage(animationInterval) {
+    function setElemSize(animationInterval) {
         let leftSidebarWidth, topSidebarHeight;
         const mainImageWidth = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().width;
         const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
         const windowWidth = $(window).width()
         const windowHeight = $(window).height()
+        const MOBILE_WIDTH = 768;
 
-        if (windowWidth <= 768) {
+        if (windowWidth <= MOBILE_WIDTH) {
             $mainContainer.css({ 'height': 3 * animationInterval + windowHeight })
             $mainIntro.css({ 'height': windowHeight })
             $mainVideoContainer.css({ 'height': windowHeight / 2 })
@@ -32,24 +33,29 @@ function mainImageScroll(animationInterval) {
         $mainContent.css({ 'height': mainImageHeight });
         $sideBarLeft.css({ 'height': mainImageHeight });
         leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
-        $sideBarLeft.css({ 'left': -leftSidebarWidth });
         $sideBarTop.css({ 'width': mainImageWidth + leftSidebarWidth });
         topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
-        $sideBarTop.css({ 'top': -topSidebarHeight });
-        $popupLeft.css({ 'width': mainImageWidth * (200 / 1000), 'left': -(mainImageWidth * (175 / 1000)) })
-        $popupRight.css({ 'width': mainImageWidth * (200 / 1000), 'right': -(mainImageWidth * (140 / 1000)) })
-        $target.css({ 'width': mainImageWidth * (380 / 1000), 'top': mainImageWidth * (172 / 1000), 'right': mainImageWidth * (100 / 1000) })
+        $popupLeft.css({ 'width': mainImageWidth * (200 / 1000) })
+        $popupRight.css({ 'width': mainImageWidth * (200 / 1000) })
+        $target.css({ 'width': mainImageWidth * (380 / 1000) })
     }
 
-    function setMainImagePosition() {
+    function setElemPosition() {
+        const mainImageWidth = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().width;
         const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
         const topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
+        const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
         const windowWidth = $(window).width()
 
         if (windowWidth > 768)
             $mainContent.css({ 'top': (window.innerHeight - (mainImageHeight + topSidebarHeight)) / 2 })
         else
             $mainContent.css({ 'top': 'unset' })
+        $sideBarLeft.css({ 'left': -leftSidebarWidth });
+        $sideBarTop.css({ 'top': -topSidebarHeight });
+        $popupLeft.css({ 'left': -(mainImageWidth * (175 / 1000)) })
+        $popupRight.css({ 'right': -(mainImageWidth * (140 / 1000)) })
+        $target.css({ 'top': mainImageWidth * (172 / 1000), 'right': mainImageWidth * (100 / 1000) })
     }
 
     function getAppearingOpacityForScroll(startScroll, scrollWidth) {
@@ -118,12 +124,12 @@ function mainImageScroll(animationInterval) {
     function mainImageScrollShow(animationInterval) {
         let animationStartScrollY = getAnimationStartScrollY();
 
-        $(function () { setElemSizeForMainImage(animationInterval) });
-        $(setMainImagePosition);
+        $(function () { setElemSize(animationInterval) });
+        $(setElemPosition);
         $(window).resize(function () {
             animationStartScrollY = getAnimationStartScrollY();
-            setElemSizeForMainImage(animationInterval);
-            setMainImagePosition();
+            setElemSize(animationInterval);
+            setElemPosition();
         });
         $(document).on('scroll touchmove mousewheel', function () {
             setOpacityForElem(animationStartScrollY, animationInterval);
