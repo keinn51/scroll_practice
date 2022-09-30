@@ -102,8 +102,8 @@ function mainImageScroll(animationInterval) {
 
         $sideBarTop.css({ 'left': getPositionForScroll(2, sidebarShowScrollY, imageShowScrollY, animationInterval, 0) });
         $sideBarLeft.css({ 'top': getPositionForScroll(2, sidebarShowScrollY, imageShowScrollY, animationInterval, slideWidth) });
-        $popupLeft.css({ 'top': getPositionForScroll(1, imageShowScrollY, animationEndScrollY, animationInterval, mainImageHeight + topSidebarHeight - 270) });
-        $popupRight.css({ 'top': getPositionForScroll(2, imageShowScrollY, animationEndScrollY, animationInterval, 100) });
+        $popupLeft.css({ 'top': getPositionForScroll(1, imageShowScrollY, animationEndScrollY, animationInterval, (mainImageHeight + topSidebarHeight) * (28 / 55)) });
+        $popupRight.css({ 'top': getPositionForScroll(2, imageShowScrollY, animationEndScrollY, animationInterval, (mainImageHeight + topSidebarHeight) * (9 / 55)) });
     }
 
     function getAnimationStartScrollY() {
