@@ -11,7 +11,7 @@ function mainImageScroll(animationInterval) {
     const $target = $('.main-preview-target')
 
     function setElemSize(animationInterval) {
-        let leftSidebarWidth, topSidebarHeight;
+        let leftSidebarWidth;
         const mainImageWidth = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().width;
         const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
         const windowWidth = $(window).width()
@@ -34,7 +34,6 @@ function mainImageScroll(animationInterval) {
         $sideBarLeft.css({ 'height': mainImageHeight });
         leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
         $sideBarTop.css({ 'width': mainImageWidth + leftSidebarWidth });
-        topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
         $popupLeft.css({ 'width': mainImageWidth * (200 / 1000) })
         $popupRight.css({ 'width': mainImageWidth * (200 / 1000) })
         $target.css({ 'width': mainImageWidth * (380 / 1000) })
@@ -97,7 +96,7 @@ function mainImageScroll(animationInterval) {
         } else return startPosition;
     }
 
-    function setPositionForScroll(animationStartScrollY, animationInterval) {
+    function setSlideWhileScroll(animationStartScrollY, animationInterval) {
         const leftSidebarWidth = document.getElementsByClassName('main-preview-sidebar-left')[0].getBoundingClientRect().width;
         const mainImageHeight = document.getElementsByClassName('main-preview-image')[0].getBoundingClientRect().height;
         const topSidebarHeight = document.getElementsByClassName('main-preview-sidebar-top')[0].getBoundingClientRect().height;
@@ -133,7 +132,7 @@ function mainImageScroll(animationInterval) {
         });
         $(document).on('scroll touchmove mousewheel', function () {
             setOpacityForElem(animationStartScrollY, animationInterval);
-            setPositionForScroll(animationStartScrollY, animationInterval);
+            setSlideWhileScroll(animationStartScrollY, animationInterval);
         });
     }
     mainImageScrollShow(animationInterval)
